@@ -38,6 +38,14 @@ function onGalleryContainerClick(event) {
   const instance = basicLightbox.create(`<img src=${originalImage}>`);
   instance.show();
 
+  // Удаление слушателя события escape при закрытии модалки кликом
+  const instanceContainer = document.querySelector(".basicLightbox");
+  instanceContainer.addEventListener("click", onInstanceContainerClick);
+
+  function onInstanceContainerClick() {
+    document.removeEventListener("keyup", escapeHeandler);
+  }
+
   // Закрытие с клавиатуры
   document.addEventListener("keyup", escapeHeandler);
 
